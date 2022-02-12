@@ -18,7 +18,7 @@ def getUserInput(wordList):
         return
     elif userInput in wordList:
         #checks if the word was already given as an input
-        printPriorInput
+        printPriorInput()
         return
     else:
         return userInput
