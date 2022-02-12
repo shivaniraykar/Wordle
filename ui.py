@@ -11,14 +11,14 @@ def getUserInput(wordList):
 
     #check if word length is 5 and just contains capital alphabets
     if(len(userInput) != 5  or not userInput.isalpha()):
-        print("Word should just contain alphabets and the length should be 5")
+        printWordRestrictions()
         return
     elif not isWordValid:
-        print("Word not found in dictionary")
+        printWordNotInDictionary()
         return
     elif userInput in wordList:
         #checks if the word was already given as an input
-        print("You have already given this input. PLease try another word")
+        printPriorInput
         return
     else:
         return userInput
