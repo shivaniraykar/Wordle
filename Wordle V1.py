@@ -2,6 +2,10 @@ from curses.ascii import isalpha
 from dictionary import getRandomWord
 from ui import getUserInput, wordIsEqualToInput
 
+totalGamePlayedCount:int = 0
+gamesWon = 0
+
+
 def countLetters(expectedWord):
     '''counts how many times a letter is present in a given word'''
     letter_count: dict = {}
@@ -29,10 +33,17 @@ def checkWord(userInput, expectedWord):
                     letter_count[userInput[i]] -= 1
     return result
 
-    
+def displayStatistic():
+    print("------Statistics-------")
+    print("Number of games played = ", totalGamePlayedCount)
+    winPercentage = (gamesWon/totalGamePlayedCount)*100
+    winPercentage = round(winPercentage, 2)
+    print("Win Percentage = ", winPercentage,"%")   
 
 def main():
     #get a random word from dictionary 
+    global totalGamePlayedCount
+    global gamesWon
     expectedWord = getRandomWord()
     wordList = []
 
@@ -47,13 +58,21 @@ def main():
             wordList.append(userInput)
             isUserInputEqualToWord = wordIsEqualToInput(expectedWord, userInput)
             if isUserInputEqualToWord:
+                gamesWon = gamesWon + 1
+                totalGamePlayedCount = totalGamePlayedCount + 1
+                displayStatistic()
                 print("-----New Challenge Begin!-----")
                 main()
             ans = checkWord(userInput, expectedWord)
             print(''.join(ans))
     else:
         print("You have reached the maximum attempts!")
-        print("-----New Challenge Begin!-----")
+        totalGamePlayedCount = totalGamePlayedCount + 1
+        displayStatistic()
+        print("\n-----New Challenge Begin!-----")
         main()
 
 main()
+
+
+
