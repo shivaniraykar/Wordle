@@ -1,62 +1,59 @@
-# declare a hidden word to SONAR
-# declare a list named wordList to store the userinputs
-# while length of wordList is less than 7
-#   Input the word
-#   convert the word to uppercase
-#   if user enters prior word
-#       print message "You have already given this input. PLease try another word"
-#   else if word length is not 5 or word contains any number or symbol or small letters
-#       print message "Word should just contain alphabets and the length should be 5"
-#   else
-#       add the word into the wordList
-#       if the userInput and the hidden word match
-#           print message "Yay...The words matched!"
-#           exit the program
-#       else 
-#           compare characters in the userInput and the hidden word
-#               if two characters match 
-#                   print message "Character (alphabet) is at correct place"
-#               else if character is present in hidden word
-#                   print message "Character (alphabet) is present in the word"
-#               else
-#                   print message "Character (alphabet) is not present in the word"
-# end while loop
-# exit the program notify user that he has reached the maximum attempts!
-
-
 from curses.ascii import isalpha
-import sys
+from dictionary import getRandomWord
+from ui import getUserInput, wordIsEqualToInput
 
+def countLetters(expectedWord):
+    '''counts how many times a letter is present in a given word'''
+    letter_count: dict = {}
+    for i in range(len(expectedWord)):
+        letter_count[expectedWord[i]] = letter_count.get(expectedWord[i], 0) + 1
+    return letter_count
 
-word = "SONAR"
-wordList = []
-    
-def compare(word1, word2):
-    for x, y in zip(word1, word2):
-        if x==y:
-            print("Character ", y ,"is at correct place")
-        elif word.find(y) != -1 :
-            print("Character ", y , "is present in the word")
+def checkWord(userInput, expectedWord):
+    '''Used to comapre the userInput and expectedWord and returns the result'''
+    result = []
+    letter_count: dict = countLetters(expectedWord)    
+
+    for i in range(len(expectedWord)):
+        if userInput[i] == expectedWord[i]:
+            result.append(" ")
+            letter_count[userInput[i]] -= 1
         else:
-            print("Character ", y , "is not present in the word")
-        
-while len(wordList) < 6:
-    userInput = input("Enter a 5 letter word: ")
-    #userInput = userInput.upper()
-    if userInput in wordList:
-        print("You have already given this input. PLease try another word")
-        continue
-    elif len(userInput) != 5  or not userInput.isalpha() or not userInput.isupper():
-        print("Word should just contain capital alphabets and the length should be 5")
-        continue
+            result.append('"')
+
+    for i in range(len(expectedWord)):
+        if userInput[i] != expectedWord[i]:
+            if userInput[i] in letter_count:
+                if letter_count[userInput[i]] > 0:
+                    result[i] = '`'
+                    letter_count[userInput[i]] -= 1
+    return result
+
+    
+
+def main():
+    #get a random word from dictionary 
+    expectedWord = getRandomWord()
+    wordList = []
+
+    #Until a exit condition is given or program exits take a user input and check if valid
+    while len(wordList) < 6:
+        userInput = getUserInput(wordList)
+        if userInput == 0:
+            break
+        if userInput is None:
+            continue
+        else:
+            wordList.append(userInput)
+            isUserInputEqualToWord = wordIsEqualToInput(expectedWord, userInput)
+            if isUserInputEqualToWord:
+                print("-----New Challenge Begin!-----")
+                main()
+            ans = checkWord(userInput, expectedWord)
+            print(''.join(ans))
     else:
-        wordList.append(userInput)
-        if word == userInput:
-            print("Yay...The words matched!")
-            sys.exit()
-        compare(word, userInput)
+        print("You have reached the maximum attempts!")
+        print("-----New Challenge Begin!-----")
+        main()
 
-
-
-sys.exit("You have reached the maximum attempts!")
-
+main()
