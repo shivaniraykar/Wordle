@@ -38,3 +38,12 @@ def isWordValidDictionaryWord(userInput):
         if word.strip() == userInput:
             return True
     return False
+
+def printWordRestrictions():
+    print("Word should just contain alphabets and the length should be 5")
+
+def printWordNotInDictionary():
+    print("Word not found in dictionary")
+
+def printPriorInput():
+    print("You have already given this input. PLease try another word")
