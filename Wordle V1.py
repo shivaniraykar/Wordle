@@ -4,6 +4,7 @@ from ui import getUserInput, wordIsEqualToInput
 
 totalGamePlayedCount:int = 0
 gamesWon = 0
+distribution = {1: 0, 2:0, 3:0, 4:0, 5:0, 6:0}
 
 
 def countLetters(expectedWord):
@@ -38,12 +39,17 @@ def displayStatistic():
     print("Number of games played = ", totalGamePlayedCount)
     winPercentage = (gamesWon/totalGamePlayedCount)*100
     winPercentage = round(winPercentage, 2)
-    print("Win Percentage = ", winPercentage,"%")   
+    print("Win Percentage = ", winPercentage,"%")  
+    print("-----Game distribution-------") 
+    for x in range(1, 7):
+        percent = (distribution[x] / totalGamePlayedCount)* 100
+        print("Game distribution for ", x, " = ", round(percent, 2))
 
 def main():
     #get a random word from dictionary 
     global totalGamePlayedCount
     global gamesWon
+    global distribution
     expectedWord = getRandomWord()
     wordList = []
 
@@ -59,6 +65,7 @@ def main():
             isUserInputEqualToWord = wordIsEqualToInput(expectedWord, userInput)
             if isUserInputEqualToWord:
                 gamesWon = gamesWon + 1
+                distribution[len(wordList)] = distribution[len(wordList)] + 1
                 totalGamePlayedCount = totalGamePlayedCount + 1
                 displayStatistic()
                 print("-----New Challenge Begin!-----")
