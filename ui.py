@@ -10,7 +10,7 @@ def getUserInput(wordList):
     isWordValid = isWordValidDictionaryWord(userInput)
 
     #check if word length is 5 and just contains capital alphabets
-    if(len(userInput) != 5  or not userInput.isalpha()):
+    if(checkLengthFiveAndAlphabets(userInput)):
         printWordRestrictions()
         return
     elif not isWordValid:
@@ -38,6 +38,10 @@ def isWordValidDictionaryWord(userInput):
         if word.strip() == userInput:
             return True
     return False
+
+def checkLengthFiveAndAlphabets(userInput):
+    return (len(userInput) != 5  or not userInput.isalpha())
+        
 
 def printWordRestrictions():
     print("Word should just contain alphabets and the length should be 5")
