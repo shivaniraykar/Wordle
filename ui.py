@@ -10,7 +10,7 @@ def getUserInput(wordList):
     isWordValid = isWordValidDictionaryWord(userInput)
 
     #check if word length is 5 and just contains capital alphabets
-    if(checkLengthFiveAndAlphabets(userInput)):
+    if(checkLengthNotFiveAndAlphabets(userInput)):
         printWordRestrictions()
         return
     elif not isWordValid:
@@ -39,7 +39,7 @@ def isWordValidDictionaryWord(userInput):
             return True
     return False
 
-def checkLengthFiveAndAlphabets(userInput):
+def checkLengthNotFiveAndAlphabets(userInput):
     return (len(userInput) != 5  or not userInput.isalpha())
         
 
