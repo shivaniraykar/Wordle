@@ -16,3 +16,30 @@ def getRandomWord():
     randomWord = random.choice(dictionary).strip()
     #print(randomWord)
     return randomWord
+
+def countLetters(expectedWord):
+    '''counts how many times a letter is present in a given word'''
+    letter_count: dict = {}
+    for i in range(len(expectedWord)):
+        letter_count[expectedWord[i]] = letter_count.get(expectedWord[i], 0) + 1
+    return letter_count
+
+def checkWord(userInput, expectedWord):
+    '''Used to comapre the userInput and expectedWord and returns the result'''
+    result = []
+    letter_count: dict = countLetters(expectedWord)    
+
+    for i in range(len(expectedWord)):
+        if userInput[i] == expectedWord[i]:
+            result.append(" ")
+            letter_count[userInput[i]] -= 1
+        else:
+            result.append('"')
+
+    for i in range(len(expectedWord)):
+        if userInput[i] != expectedWord[i]:
+            if userInput[i] in letter_count:
+                if letter_count[userInput[i]] > 0:
+                    result[i] = '`'
+                    letter_count[userInput[i]] -= 1
+    return result
