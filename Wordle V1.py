@@ -1,38 +1,10 @@
 from curses.ascii import isalpha
-from dictionary import getRandomWord
+from dictionary import checkWord, getRandomWord
 from ui import getUserInput, wordIsEqualToInput
 
 totalGamePlayedCount:int = 0
 gamesWon = 0
 distribution = {1: 0, 2:0, 3:0, 4:0, 5:0, 6:0}
-
-
-def countLetters(expectedWord):
-    '''counts how many times a letter is present in a given word'''
-    letter_count: dict = {}
-    for i in range(len(expectedWord)):
-        letter_count[expectedWord[i]] = letter_count.get(expectedWord[i], 0) + 1
-    return letter_count
-
-def checkWord(userInput, expectedWord):
-    '''Used to comapre the userInput and expectedWord and returns the result'''
-    result = []
-    letter_count: dict = countLetters(expectedWord)    
-
-    for i in range(len(expectedWord)):
-        if userInput[i] == expectedWord[i]:
-            result.append(" ")
-            letter_count[userInput[i]] -= 1
-        else:
-            result.append('"')
-
-    for i in range(len(expectedWord)):
-        if userInput[i] != expectedWord[i]:
-            if userInput[i] in letter_count:
-                if letter_count[userInput[i]] > 0:
-                    result[i] = '`'
-                    letter_count[userInput[i]] -= 1
-    return result
 
 def displayStatistic():
     print("------Statistics-------")
