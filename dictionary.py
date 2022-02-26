@@ -12,8 +12,12 @@ def getValidDictionary():
 
 def getRandomWord():
     '''Choose a random word from dictionary'''
+    file1 = open("gameplay.log", "a")
     dictionary = getValidDictionary()
     randomWord = random.choice(dictionary).strip()
+    file1.write("\n------------New Game-----------\n")
+    file1.write("The selected word is : {} \n".format(randomWord))
+    file1.close()
     #print(randomWord)
     return randomWord
 
@@ -25,7 +29,7 @@ def countLetters(expectedWord):
     return letter_count
 
 def checkWord(userInput, expectedWord):
-    '''Used to comapre the userInput and expectedWord and returns the result'''
+    '''Used to compare the userInput and expectedWord and returns the result'''
     result = []
     letter_count: dict = countLetters(expectedWord)    
 
