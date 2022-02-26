@@ -33,7 +33,7 @@ def wordIsEqualToInput(expectedWord, userInput):
 
 def isWordValidDictionaryWord(userInput):
     '''Checks if userInput is a valid dictionary word and return true or false accordingly'''
-    wordList = getValidDictionary()
+    wordList = open('valid-words.txt').read().split()
     for word in wordList:
         if word.strip() == userInput:
             return True

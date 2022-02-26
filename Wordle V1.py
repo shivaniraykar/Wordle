@@ -1,5 +1,5 @@
 from curses.ascii import isalpha
-from dictionary import checkWord, getRandomWord
+from dictionary import checkWord, getRandomWord, getValidDictionary
 from ui import getUserInput, wordIsEqualToInput
 
 totalGamePlayedCount:int = 0
@@ -34,7 +34,7 @@ def displayStatisticsInFile():
         file1.write("Game distribution for {} = {}\n".format(x, round(percent, 2)))
     file1.close()
 
-def main():
+def play():
     #get a random word from dictionary 
     global totalGamePlayedCount
     global gamesWon
@@ -63,7 +63,7 @@ def main():
                 totalGamePlayedCount = totalGamePlayedCount + 1
                 displayStatistic()
                 print("-----New Challenge Begin!-----")
-                main()
+                play()
             ans = checkWord(userInput, expectedWord)
             print(''.join(ans))
     else:
@@ -71,7 +71,11 @@ def main():
         totalGamePlayedCount = totalGamePlayedCount + 1
         displayStatistic()
         print("\n-----New Challenge Begin!-----")
-        main()
+        play()
+
+def main():
+    getValidDictionary()
+    play()
 
 main()
 
