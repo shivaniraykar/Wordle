@@ -24,16 +24,20 @@ def displayStatistic():
     displayStatisticsInFile()
 
 def displayStatisticsInFile():
-    file1 = open("gameplay.log", "a")
-    file1.write("\n------Statistics-------\n")
-    file1.write("Number of games played = {} \n".format(totalGamePlayedCount))
-    winPercentage = calculateWinPercentage()
-    file1.write("Win Percentage = {}% \n".format(winPercentage))
-    file1.write("-----Game distribution-------\n") 
-    for x in range(1, 7):
-        percent = (distribution[x] / totalGamePlayedCount)* 100
-        file1.write("Game distribution for {} = {}\n".format(x, round(percent, 2)))
-    file1.close()
+    try:
+        file1 = open("gameplay.log", "a")
+    except FileNotFoundError as e:
+        print(f"Cannot open file gameplay.log ({e})")
+    else:
+        file1.write("\n------Statistics-------\n")
+        file1.write("Number of games played = {} \n".format(totalGamePlayedCount))
+        winPercentage = calculateWinPercentage()
+        file1.write("Win Percentage = {}% \n".format(winPercentage))
+        file1.write("-----Game distribution-------\n") 
+        for x in range(1, 7):
+            percent = (distribution[x] / totalGamePlayedCount)* 100
+            file1.write("Game distribution for {} = {}\n".format(x, round(percent, 2)))
+        file1.close()
 
 def play():
     #get a random word from dictionary 
@@ -54,9 +58,13 @@ def play():
             continue
         else:
             wordList.append(userInput)
-            file1 = open("gameplay.log", "a")
-            file1.write("The user input for try {} : {} \n".format(len(wordList), userInput))
-            file1.close()
+            try:
+                file1 = open("gameplay.log", "a")
+            except FileNotFoundError as e:
+                print(f"Cannot open file gameplay.log ({e})")
+            else:
+                file1.write("The user input for try {} : {} \n".format(len(wordList), userInput))
+                file1.close()
             isUserInputEqualToWord = wordIsEqualToInput(expectedWord, userInput)
             if isUserInputEqualToWord:
                 gamesWon = gamesWon + 1
@@ -78,7 +86,8 @@ def main():
     getValidDictionary()
     play()
 
-main()
+if __name__ == '__main__': 
+    main()
 
 
 
