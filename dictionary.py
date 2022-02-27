@@ -3,17 +3,21 @@ import random
 def getValidDictionary():
     '''Forms a valid dictionary that just contains 5 letter words'''
     file1 = open('words.txt', 'r')
+    valid_words_file = open('valid-words.txt','w')
     words = file1.readlines()
-    dictionary = []
     for word in words:
         if len(word.strip()) == 5:
-            dictionary.append(word)
-    return dictionary
+            valid_words_file.write("{} \n".format(word.strip()))
+    file1.close()
+    valid_words_file.close()
 
 def getRandomWord():
     '''Choose a random word from dictionary'''
-    dictionary = getValidDictionary()
-    randomWord = random.choice(dictionary).strip()
+    file1 = open("gameplay.log", "a")
+    randomWord = random.choice(open('valid-words.txt').read().split()).strip()
+    file1.write("\n------------New Game-----------\n")
+    file1.write("The selected word is : {} \n".format(randomWord))
+    file1.close()
     #print(randomWord)
     return randomWord
 
@@ -25,7 +29,7 @@ def countLetters(expectedWord):
     return letter_count
 
 def checkWord(userInput, expectedWord):
-    '''Used to comapre the userInput and expectedWord and returns the result'''
+    '''Used to compare the userInput and expectedWord and returns the result'''
     result = []
     letter_count: dict = countLetters(expectedWord)    
 
