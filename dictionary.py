@@ -14,7 +14,10 @@ def getValidDictionary():
 def getRandomWord(selectedWordList):
     '''Choose a random word from dictionary'''
     file1 = open("gameplay.log", "a")
+    file2 = open('valid-words.txt')
     randomWord = ""
+    if(len(file2.readlines()) == len(selectedWordList)):
+        selectedWordList = []
     while True:
         randomWord = random.choice(open('valid-words.txt').read().split()).strip()
         if(randomWord not in selectedWordList):
@@ -23,7 +26,7 @@ def getRandomWord(selectedWordList):
     file1.write("\n------------New Game-----------\n")
     file1.write("The selected word is : {} \n".format(randomWord))
     file1.close()
-    print(' '.join(selectedWordList))
+    #print(' '.join(selectedWordList))
     #print(randomWord)
     return randomWord
 
