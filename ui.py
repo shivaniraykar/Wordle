@@ -33,11 +33,15 @@ def wordIsEqualToInput(expectedWord, userInput):
 
 def isWordValidDictionaryWord(userInput):
     '''Checks if userInput is a valid dictionary word and return true or false accordingly'''
-    wordList = open('valid-words.txt').read().split()
-    for word in wordList:
-        if word.strip() == userInput:
-            return True
-    return False
+    try:
+        wordList = open('valid-words.txt').read().split()
+    except FileNotFoundError as e:
+        print(f"Cannot open file valid-words.txt ({e})")
+    else:
+        for word in wordList:
+            if word.strip() == userInput:
+                return True
+        return False
 
 def checkLengthNotFiveAndAlphabets(userInput):
     return (len(userInput) != 5  or not userInput.isalpha())
