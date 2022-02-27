@@ -18,23 +18,28 @@ def getValidDictionary():
     except Exception as e:
         print(f"{e}")
 
-def getRandomWord():
+def getRandomWord(selectedWordList):
     '''Choose a random word from dictionary'''
     try:
-        try:
-            file1 = open("gameplay.log", "a")
-        except FileNotFoundError as e:
-            print(f"Cannot open file gameplay.log ({e})")
-        else:
+        file1 = open("gameplay.log", "a")
+        file2 = open('valid-words.txt')
+    except FileNotFoundError as e:
+        print(f"Cannot open file ({e})")
+    else:
+        randomWord = ""
+        if(len(file2.readlines()) == len(selectedWordList)):
+            selectedWordList = []
+        while True:
             randomWord = random.choice(open('valid-words.txt').read().split()).strip()
-            file1.write("\n------------New Game-----------\n")
-            file1.write("The selected word is : {} \n".format(randomWord))
-            file1.close()
-            #print(randomWord)
-            return randomWord
-    except Exception as e:
-        print(f"{e}")
-
+            if(randomWord not in selectedWordList):
+                selectedWordList.append(randomWord)
+                break
+        file1.write("\n------------New Game-----------\n")
+        file1.write("The selected word is : {} \n".format(randomWord))
+        file1.close()
+        #print(' '.join(selectedWordList))
+        #print(randomWord)
+        return randomWord
 
 def countLetters(expectedWord):
     try:

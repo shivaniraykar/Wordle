@@ -33,6 +33,9 @@ def wordIsEqualToInput(expectedWord, userInput):
     '''Used to check if two words match and returns true or false accordingly'''
     if expectedWord == userInput:
         print("Yay...The words matched!")
+        file1 = open("gameplay.log", "a")
+        file1.write("Yay...The words matched!")
+        file1.close()
         return True
     else:
         return False    
