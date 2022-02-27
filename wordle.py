@@ -5,6 +5,7 @@ from ui import getUserInput, wordIsEqualToInput
 totalGamePlayedCount:int = 0
 gamesWon = 0
 distribution = {1: 0, 2:0, 3:0, 4:0, 5:0, 6:0}
+selectedWordList = []
 
 def calculateWinPercentage():
     winPercentage = (gamesWon/totalGamePlayedCount)*100
@@ -39,7 +40,7 @@ def play():
     global totalGamePlayedCount
     global gamesWon
     global distribution
-    expectedWord = getRandomWord()
+    expectedWord = getRandomWord(selectedWordList)
     wordList = []
 
     #Until a exit condition is given or program exits take a user input and check if valid

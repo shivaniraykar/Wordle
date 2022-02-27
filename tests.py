@@ -205,7 +205,8 @@ class GetUserInput_Tests(unittest.TestCase):
 
 class GetRandomWord_Tests(unittest.TestCase):
     def test_getRandomWord_Positive(self) -> None:
-        result = getRandomWord()
+        selectedList = ["books", "marks"]
+        result = getRandomWord(selectedList)
         self.assertTrue(len(result) == 5 and result.isalpha())
 
 class CountLetters_Tests(unittest.TestCase):
