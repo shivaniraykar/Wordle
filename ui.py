@@ -1,7 +1,5 @@
 from dictionary import getValidDictionary
 from exceptions import InvalidWord, LengthNotFiveAndAlphabets, SameInput
-#from wordle import displayStatistic
-
 
 def getUserInput(wordList):
     '''Gets a user input, checks if it's valid and returns it.'''
