@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 from dictionary import checkWord, countLetters, getRandomWord
 
-from ui import checkLengthNotFiveAndAlphabets, getUserInput, isWordValidDictionaryWord, printWordRestrictions, wordIsEqualToInput
+from ui import checkLengthNotFiveAndAlphabets, getUserInput, isWordValidDictionaryWord, printWordRestrictionsError, wordIsEqualToInput
 
 class WordIsEqualToInput_Tests(unittest.TestCase):
     def test_wordIsEqualToInput_wrongInput1(self) -> None:
@@ -159,31 +159,31 @@ class GetUserInput_Tests(unittest.TestCase):
 
     @patch('builtins.input', return_value = 'hey')
     def test_getUserInput_lessCharacters(self,mock_inputs):
-        with patch("ui.printWordRestrictions") as patched_function:
+        with patch("ui.printWordRestrictionsError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
     @patch('builtins.input', return_value = 'Ban!@')
     def test_getUserInput_symbolsInput1(self,mock_inputs):
-        with patch("ui.printWordRestrictions") as patched_function:
+        with patch("ui.printWordRestrictionsError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
     @patch('builtins.input', return_value = '!@#$%@')
     def test_getUserInput_symbolsInput2(self,mock_inputs):
-        with patch("ui.printWordRestrictions") as patched_function:
+        with patch("ui.printWordRestrictionsError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
     @patch('builtins.input', return_value = 'henlo')
     def test_getUserInput_invalidWord1(self,mock_inputs):
-        with patch("ui.printWordNotInDictionary") as patched_function:
+        with patch("ui.printWordNotInDictionaryError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
     @patch('builtins.input', return_value = 'phone')
     def test_getUserInput_priorInput(self,mock_inputs):
-        with patch("ui.printPriorInput") as patched_function:
+        with patch("ui.printPriorInputError") as patched_function:
             getUserInput(['phone', 'books'])
         patched_function.assert_called()
 
@@ -194,7 +194,7 @@ class GetUserInput_Tests(unittest.TestCase):
 
     @patch('builtins.input', return_value = 'abcde')
     def test_getUserInput_invalidWord2(self,mock_inputs):
-        with patch("ui.printWordNotInDictionary") as patched_function:
+        with patch("ui.printWordNotInDictionaryError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
@@ -205,7 +205,8 @@ class GetUserInput_Tests(unittest.TestCase):
 
 class GetRandomWord_Tests(unittest.TestCase):
     def test_getRandomWord_Positive(self) -> None:
-        result = getRandomWord()
+        selectedList = ["books", "marks"]
+        result = getRandomWord(selectedList)
         self.assertTrue(len(result) == 5 and result.isalpha())
 
 class CountLetters_Tests(unittest.TestCase):
