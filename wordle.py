@@ -1,5 +1,6 @@
 from curses.ascii import isalpha
 from dictionary import checkWord, getRandomWord, getValidDictionary
+from statistics import writeWordRank
 from ui import getUserInput, wordIsEqualToInput
 
 totalGamePlayedCount:int = 0
@@ -84,6 +85,7 @@ def play():
 
 def main():
     getValidDictionary()
+    writeWordRank()
     play()
 
 if __name__ == '__main__': 

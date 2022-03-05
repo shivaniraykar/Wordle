@@ -1,5 +1,4 @@
 import random
-from statistics import calculateLikelyhood, writeWordRank
 
 def getValidDictionary():
     '''Forms a valid dictionary that just contains 5 letter words'''
@@ -21,7 +20,6 @@ def getValidDictionary():
 
 def getRandomWord(selectedWordList):
     '''Choose a random word from dictionary'''
-    writeWordRank()
     try:
         file1 = open("gameplay.log", "a")
         file2 = open('valid-words.txt')
