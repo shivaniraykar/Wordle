@@ -44,6 +44,7 @@ def listToTuple() -> None:
     for key in letterDict:
         list = letterDict.get(key)
         letterDict[key] = tuple(list)
+    return letterDict
 
 
 def parseStatisticToTuple() -> Dict:
