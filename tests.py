@@ -1,8 +1,9 @@
 import unittest
 from unittest.mock import patch
 from dictionary import checkWord, countLetters, getRandomWord
+from statistics import calculateLikelyhood, listToTuple, parseStatisticToTuple, writeInLetterFrequency, writeWordRank
 
-from ui import checkLengthNotFiveAndAlphabets, getUserInput, isWordValidDictionaryWord, printWordRestrictions, wordIsEqualToInput
+from ui import checkLengthNotFiveAndAlphabets, getUserInput, isWordValidDictionaryWord, printWordRestrictionsError, wordIsEqualToInput
 
 class WordIsEqualToInput_Tests(unittest.TestCase):
     def test_wordIsEqualToInput_wrongInput1(self) -> None:
@@ -159,31 +160,31 @@ class GetUserInput_Tests(unittest.TestCase):
 
     @patch('builtins.input', return_value = 'hey')
     def test_getUserInput_lessCharacters(self,mock_inputs):
-        with patch("ui.printWordRestrictions") as patched_function:
+        with patch("ui.printWordRestrictionsError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
     @patch('builtins.input', return_value = 'Ban!@')
     def test_getUserInput_symbolsInput1(self,mock_inputs):
-        with patch("ui.printWordRestrictions") as patched_function:
+        with patch("ui.printWordRestrictionsError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
     @patch('builtins.input', return_value = '!@#$%@')
     def test_getUserInput_symbolsInput2(self,mock_inputs):
-        with patch("ui.printWordRestrictions") as patched_function:
+        with patch("ui.printWordRestrictionsError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
     @patch('builtins.input', return_value = 'henlo')
     def test_getUserInput_invalidWord1(self,mock_inputs):
-        with patch("ui.printWordNotInDictionary") as patched_function:
+        with patch("ui.printWordNotInDictionaryError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
     @patch('builtins.input', return_value = 'phone')
     def test_getUserInput_priorInput(self,mock_inputs):
-        with patch("ui.printPriorInput") as patched_function:
+        with patch("ui.printPriorInputError") as patched_function:
             getUserInput(['phone', 'books'])
         patched_function.assert_called()
 
@@ -194,7 +195,7 @@ class GetUserInput_Tests(unittest.TestCase):
 
     @patch('builtins.input', return_value = 'abcde')
     def test_getUserInput_invalidWord2(self,mock_inputs):
-        with patch("ui.printWordNotInDictionary") as patched_function:
+        with patch("ui.printWordNotInDictionaryError") as patched_function:
             getUserInput([])
         patched_function.assert_called()
 
@@ -205,7 +206,8 @@ class GetUserInput_Tests(unittest.TestCase):
 
 class GetRandomWord_Tests(unittest.TestCase):
     def test_getRandomWord_Positive(self) -> None:
-        result = getRandomWord()
+        selectedList = ["books", "marks"]
+        result = getRandomWord(selectedList)
         self.assertTrue(len(result) == 5 and result.isalpha())
 
 class CountLetters_Tests(unittest.TestCase):
@@ -320,7 +322,34 @@ class CheckWord_Tests(unittest.TestCase):
         result = ''.join(result)
         self.assertEqual(result, '  " "')
 
-
+class CheckWord_Tests(unittest.TestCase):
+    def test_listToTuple_function(self)->None:
+        result = listToTuple()
+        for key in result:
+            self.assertTrue(type(result[key]) is tuple) 
     
+    def test_checkstats_input1(self)->None:
+        result = calculateLikelyhood()
+        self.assertEqual(len(result),1379)
+    
+    def test_writeWordRank_function(self)->None:
+        writeWordRank()
+        file1 = open('wordRank.csv', 'r')
+        words = file1.readlines()
+        file1.close()
+        self.assertEqual(len(words), 1379)
+    
+    def test_writeInLetterFrequency_function(self)->None:
+        writeInLetterFrequency()
+        file1 = open('letterFrequency.csv', 'r')
+        lines = file1.readlines()
+        file1.close()
+        self.assertEqual(len(lines),26)
+
+    def test_parseStatisticToTuple_function(self)->None:
+        result = parseStatisticToTuple()
+        for key in result:
+            self.assertTrue(type(result[key]) is tuple)
+
 if __name__ == '__main__':
     unittest.main()
