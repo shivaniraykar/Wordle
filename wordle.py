@@ -8,12 +8,12 @@ gamesWon = 0
 distribution = {1: 0, 2:0, 3:0, 4:0, 5:0, 6:0}
 selectedWordList = []
 
-def calculateWinPercentage():
+def calculateWinPercentage() -> float:
     winPercentage = (gamesWon/totalGamePlayedCount)*100
     winPercentage = round(winPercentage, 2)
     return winPercentage
 
-def displayStatistic():
+def displayStatistic() -> None:
     print("------Statistics-------")
     print("Number of games played = ", totalGamePlayedCount)
     winPercentage = calculateWinPercentage()
@@ -24,7 +24,7 @@ def displayStatistic():
         print("Game distribution for ", x, " = ", round(percent, 2))
     displayStatisticsInFile()
 
-def displayStatisticsInFile():
+def displayStatisticsInFile() -> None:
     try:
         file1 = open("gameplay.log", "a")
     except FileNotFoundError as e:
@@ -40,7 +40,7 @@ def displayStatisticsInFile():
             file1.write("Game distribution for {} = {}\n".format(x, round(percent, 2)))
         file1.close()
 
-def play():
+def play() -> None:
     #get a random word from dictionary 
     global totalGamePlayedCount
     global gamesWon

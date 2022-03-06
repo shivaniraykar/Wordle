@@ -1,6 +1,6 @@
 import random
 
-def getValidDictionary():
+def getValidDictionary() -> None:
     '''Forms a valid dictionary that just contains 5 letter words'''
     try:
         try:
@@ -18,7 +18,7 @@ def getValidDictionary():
     except Exception as e:
         print(f"{e}")
 
-def getRandomWord(selectedWordList):
+def getRandomWord(selectedWordList) -> str | None:
     '''Choose a random word from dictionary'''
     try:
         file1 = open("gameplay.log", "a")
@@ -41,7 +41,7 @@ def getRandomWord(selectedWordList):
         #print(randomWord)
         return randomWord
 
-def countLetters(expectedWord):
+def countLetters(expectedWord) -> dict | None:
     try:
         '''counts how many times a letter is present in a given word'''
         letter_count: dict = {}

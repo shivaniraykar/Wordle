@@ -29,7 +29,7 @@ def getUserInput(wordList):
     #finally:
         #displayStatistic()
 
-def wordIsEqualToInput(expectedWord, userInput):
+def wordIsEqualToInput(expectedWord, userInput) -> bool:
     '''Used to check if two words match and returns true or false accordingly'''
     if expectedWord == userInput:
         print("Yay...The words matched!")
@@ -40,7 +40,7 @@ def wordIsEqualToInput(expectedWord, userInput):
     else:
         return False    
 
-def isWordValidDictionaryWord(userInput):
+def isWordValidDictionaryWord(userInput) -> bool | None:
     '''Checks if userInput is a valid dictionary word and return true or false accordingly'''
     try:
         wordList = open('valid-words.txt').read().split()
@@ -52,14 +52,14 @@ def isWordValidDictionaryWord(userInput):
                 return True
         return False
 
-def checkLengthNotFiveAndAlphabets(userInput):
+def checkLengthNotFiveAndAlphabets(userInput) -> bool:
     return (len(userInput) != 5  or not userInput.isalpha())
         
-def printWordRestrictionsError():
+def printWordRestrictionsError() -> None:
     print("Word should just contain alphabets and the length should be 5")
 
-def printWordNotInDictionaryError():
+def printWordNotInDictionaryError() -> None:
     print("Word not found in dictionary")
 
-def printPriorInputError():
+def printPriorInputError() -> None:
     print("You have already given this input. PLease try another word")
