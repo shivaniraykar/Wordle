@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch
 from dictionary import checkWord, countLetters, getRandomWord
+from statistics import calculateLikelyhood, listToTuple, parseStatisticToTuple, writeInLetterFrequency, writeWordRank
 
 from ui import checkLengthNotFiveAndAlphabets, getUserInput, isWordValidDictionaryWord, printWordRestrictionsError, wordIsEqualToInput
 
@@ -321,7 +322,34 @@ class CheckWord_Tests(unittest.TestCase):
         result = ''.join(result)
         self.assertEqual(result, '  " "')
 
-
+class CheckWord_Tests(unittest.TestCase):
+    def test_listToTuple_function(self)->None:
+        result = listToTuple()
+        for key in result:
+            self.assertTrue(type(result[key]) is tuple) 
     
+    def test_checkstats_input1(self)->None:
+        result = calculateLikelyhood()
+        self.assertEqual(len(result),1379)
+    
+    def test_writeWordRank_function(self)->None:
+        writeWordRank()
+        file1 = open('wordRank.csv', 'r')
+        words = file1.readlines()
+        file1.close()
+        self.assertEqual(len(words), 1379)
+    
+    def test_writeInLetterFrequency_function(self)->None:
+        writeInLetterFrequency()
+        file1 = open('letterFrequency.csv', 'r')
+        lines = file1.readlines()
+        file1.close()
+        self.assertEqual(len(lines),26)
+
+    def test_parseStatisticToTuple_function(self)->None:
+        result = parseStatisticToTuple()
+        for key in result:
+            self.assertTrue(type(result[key]) is tuple)
+
 if __name__ == '__main__':
     unittest.main()
