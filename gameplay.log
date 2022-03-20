@@ -181,3 +181,70 @@ Game distribution for 3 = 0.0
 Game distribution for 4 = 0.0
 Game distribution for 5 = 0.0
 Game distribution for 6 = 0.0
+
+------------New Game-----------
+The selected word is : spain 
+The user input for try 1 : books 
+The user input for try 2 : rebel 
+The user input for try 3 : match 
+The user input for try 4 : space 
+The user input for try 5 : cases 
+The user input for try 6 : guess 
+
+------Statistics-------
+Number of games played = 1 
+Win Percentage = 0.0% 
+-----Game distribution-------
+Game distribution for 1 = 0.0
+Game distribution for 2 = 0.0
+Game distribution for 3 = 0.0
+Game distribution for 4 = 0.0
+Game distribution for 5 = 0.0
+Game distribution for 6 = 0.0
+
+------------New Game-----------
+The selected word is : arrow 
+The user input for try 1 : glass 
+The user input for try 2 : banks 
+The user input for try 3 : abuse 
+The user input for try 4 : arrow 
+Yay...The words matched!
+------Statistics-------
+Number of games played = 2 
+Win Percentage = 50.0% 
+-----Game distribution-------
+Game distribution for 1 = 0.0
+Game distribution for 2 = 0.0
+Game distribution for 3 = 0.0
+Game distribution for 4 = 50.0
+Game distribution for 5 = 0.0
+Game distribution for 6 = 0.0
+
+------------New Game-----------
+The selected word is : royal 
+The user input for try 1 : books 
+The user input for try 2 : banks 
+The user input for try 3 : ahead 
+The user input for try 4 : adobe 
+
+------Statistics-------
+Number of games played = 3 
+Win Percentage = 33.33% 
+-----Game distribution-------
+Game distribution for 1 = 0.0
+Game distribution for 2 = 0.0
+Game distribution for 3 = 0.0
+Game distribution for 4 = 33.33
+Game distribution for 5 = 0.0
+Game distribution for 6 = 0.0
+
+------Statistics-------
+Number of games played = 4 
+Win Percentage = 25.0% 
+-----Game distribution-------
+Game distribution for 1 = 0.0
+Game distribution for 2 = 0.0
+Game distribution for 3 = 0.0
+Game distribution for 4 = 25.0
+Game distribution for 5 = 0.0
+Game distribution for 6 = 0.0
