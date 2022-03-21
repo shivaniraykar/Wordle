@@ -1,13 +1,15 @@
-from dictionary import checkWord, getRandomWord, getValidDictionary
+from dictionary import Dictionary
 from statistics import writeWordRank
-from ui import getUserInput, wordIsEqualToInput
+from ui import UI
 
 class Wordle:
-    def __init__(self) -> None:
+    def __init__(self, dictObj, ui_obj) -> None:
         self.totalGamePlayedCount = 0
         self.gamesWon = 0
         self.distribution = {1: 0, 2:0, 3:0, 4:0, 5:0, 6:0}
         self.selectedWordList = []
+        self.dict = dictObj
+        self.ui_obj = ui_obj
     
     def __str__(self):
         return 'Total games played = '+ str(self.totalGamePlayedCount)+ ' and total games won = '+ str(self.gamesWon)
@@ -16,8 +18,7 @@ class Wordle:
         winPercentage = (self.gamesWon/self.totalGamePlayedCount)*100
         winPercentage = round(winPercentage, 2)
         return winPercentage
-    
-    
+        
     def displayStatistic(self) -> None:
         print("------Statistics-------")
         print("Number of games played = ", self.totalGamePlayedCount)
@@ -49,12 +50,12 @@ class Wordle:
         #get a random word from dictionary 
         ##global gamesWon
         #global distribution
-        expectedWord = getRandomWord(self.selectedWordList)
+        expectedWord = self.dict.getRandomWord(self.selectedWordList)
         wordList = []
 
         #Until a exit condition is given or program exits take a user input and check if valid
         while len(wordList) < 6:
-            userInput = getUserInput(wordList)
+            userInput = self.ui_obj.getUserInput(wordList)
             if userInput == 0:
                 self.totalGamePlayedCount = self.totalGamePlayedCount + 1
                 self.displayStatisticsInFile()
@@ -70,7 +71,7 @@ class Wordle:
                 else:
                     file1.write("The user input for try {} : {} \n".format(len(wordList), userInput))
                     file1.close()
-                isUserInputEqualToWord = wordIsEqualToInput(expectedWord, userInput)
+                isUserInputEqualToWord = self.ui_obj.wordIsEqualToInput(expectedWord, userInput)
                 if isUserInputEqualToWord:
                     self.gamesWon = self.gamesWon + 1
                     self.distribution[len(wordList)] = self.distribution[len(wordList)] + 1
@@ -78,7 +79,7 @@ class Wordle:
                     self.displayStatistic()
                     print("-----New Challenge Begin!-----")
                     self.play()
-                ans = checkWord(userInput, expectedWord)
+                ans = self.dict.checkWord(userInput, expectedWord)
                 print(''.join(ans))
         else:
             print("You have reached the maximum attempts!")
@@ -88,12 +89,15 @@ class Wordle:
             self.play()
 
 def main():
-    Game = Wordle()
-    getValidDictionary()
+    dict = Dictionary()
+    ui_obj = UI()
+    Game = Wordle(dict, ui_obj)
+    dict.getValidDictionary()
     writeWordRank()
     Game.play()
     print(Game)
-
+    print(dict)
+    print(ui_obj)
 
 if __name__ == '__main__': 
     main()
