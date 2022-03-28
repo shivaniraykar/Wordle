@@ -28,7 +28,8 @@ def getPossibleWords():
 
         valid_words_file = open('valid-words.txt','r')
         words = valid_words_file.readlines()
-        ll = LinkedList()
+        l1 = LinkedList()
+        l2 = LinkedList()
         word_dict = {}
         for word in words:
             word = word.strip()
@@ -36,6 +37,7 @@ def getPossibleWords():
             has_no_badLetters = any([char in word for char in badLetter_list])
             
             if has_all_goodLetters == True and has_no_badLetters == False:
+                l2.insert(word)
                 if(letter1):
                     if(word[0] != letter1.strip()):
                         continue
@@ -51,9 +53,13 @@ def getPossibleWords():
                 if(letter5):
                     if(word[4] != letter5.strip()):
                         continue
-                ll.insert(word)
+                l1.insert(word)
 
-        current = ll.head
+        if l1.head:
+            current = l1.head
+        else:
+            current = l2.head
+            
         while(current):
             word_dict[current.data] = int(getWordRank(current.data.strip()))
             current = current.next
