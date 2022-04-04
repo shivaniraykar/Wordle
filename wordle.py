@@ -1,5 +1,6 @@
 from dictionary import Dictionary
 from statistics import writeWordRank
+from helper import getPossibleWords
 from ui import UI
 
 class Wordle:
@@ -88,16 +89,48 @@ class Wordle:
             print("\n-----New Challenge Begin!-----")
             self.play()
 
+    def playWithHelper(self) -> None:
+        expectedWord = self.dict.getRandomWord(self.selectedWordList)
+        wordList = []
+        userInput = "sales"
+        while len(wordList) < 6:
+            print(f"User input {len(wordList)} : {userInput}\n")
+            self.totalGamePlayedCount = self.totalGamePlayedCount + 1
+            #self.displayStatisticsInFile()
+            wordList.append(userInput)
+            try:
+                file1 = open("gameplay.log", "a")
+            except FileNotFoundError as e:
+                print(f"Cannot open file gameplay.log ({e})")
+            else:
+                file1.write("The user input for try {} : {} \n".format(len(wordList), userInput))
+                file1.close()
+            isUserInputEqualToWord = self.ui_obj.wordIsEqualToInput(expectedWord, userInput)
+            if isUserInputEqualToWord:
+                self.gamesWon = self.gamesWon + 1
+                self.distribution[len(wordList)] = self.distribution[len(wordList)] + 1
+                self.totalGamePlayedCount = self.totalGamePlayedCount + 1
+                break
+                #self.displayStatistic()
+            ans = self.dict.checkWord(userInput, expectedWord)
+            print(''.join(ans))
+            goodLetterList = self.dict.goodLettersList
+            badLetterList = self.dict.badLettersList
+            word_dict = self.dict.word_dict
+            userInput = getPossibleWords(goodLetterList, badLetterList, word_dict)
+            print(userInput)
+
 def main():
     dict = Dictionary()
     ui_obj = UI()
     Game = Wordle(dict, ui_obj)
     dict.getValidDictionary()
     writeWordRank()
-    Game.play()
-    print(Game)
-    print(dict)
-    print(ui_obj)
+    #Game.play()
+    Game.playWithHelper()
+    #print(Game)
+    #print(dict)
+    #print(ui_obj)
 
 if __name__ == '__main__': 
     main()

@@ -3,6 +3,9 @@ import random
 class Dictionary:
     def __init__(self) -> None:
         self.validWordsCount = 0
+        self.goodLettersList = ""
+        self.badLettersList = ""
+        self.word_dict = {}
     
     def __str__(self):
         return 'Total valid words = '+ str(self.validWordsCount)
@@ -46,7 +49,7 @@ class Dictionary:
             file1.write("The selected word is : {} \n".format(randomWord))
             file1.close()
             #print(' '.join(selectedWordList))
-            #print(randomWord)
+            print(randomWord)
             return randomWord
 
     def countLetters(self, expectedWord) -> dict | None:
@@ -64,7 +67,6 @@ class Dictionary:
         try:
             result = []
             letter_count: dict = self.countLetters(expectedWord)    
-
             for i in range(len(expectedWord)):
                 if userInput[i] == expectedWord[i]:
                     result.append(" ")
@@ -78,6 +80,20 @@ class Dictionary:
                         if letter_count[userInput[i]] > 0:
                             result[i] = '`'
                             letter_count[userInput[i]] -= 1
+                            
+            #changes for helper function
+            for i in range(5):
+                x = userInput[i] not in self.goodLettersList
+                if result[i] == ' ' and x:
+                    self.goodLettersList = self.goodLettersList + userInput[i]
+                    self.word_dict[i] = userInput[i]
+                elif result[i] == '`' and x:
+                    self.goodLettersList = self.goodLettersList + userInput[i]
+
+            for i in range(5):
+                if result[i] == '"' and userInput[i] not in self.goodLettersList:
+                    self.badLettersList = self.badLettersList + userInput[i]
+
             return result
         except Exception as e:
             print(f"{e}")
