@@ -1,16 +1,22 @@
+from sqlite3 import dbapi2
+from database import databaseLogger
 from dictionary import Dictionary
 from statistics import writeWordRank
 from helper import getPossibleWords
 from ui import UI
+from datetime import datetime
+
 
 class Wordle:
-    def __init__(self, dictObj, ui_obj) -> None:
+    def __init__(self, dictObj, ui_obj, db_obj) -> None:
         self.totalGamePlayedCount = 0
         self.gamesWon = 0
         self.distribution = {1: 0, 2:0, 3:0, 4:0, 5:0, 6:0}
         self.selectedWordList = []
         self.dict = dictObj
         self.ui_obj = ui_obj
+        self.db = db_obj
+        self.time = datetime.now()
     
     def __str__(self):
         return 'Total games played = '+ str(self.totalGamePlayedCount)+ ' and total games won = '+ str(self.gamesWon)
@@ -42,9 +48,12 @@ class Wordle:
             winPercentage = self.calculateWinPercentage()
             file1.write("Win Percentage = {}% \n".format(winPercentage))
             file1.write("-----Game distribution-------\n") 
+            dict = {}
             for x in range(1, 7):
                 percent = (self.distribution[x] / self.totalGamePlayedCount)* 100
+                dict[x] = round(percent,2)
                 file1.write("Game distribution for {} = {}\n".format(x, round(percent, 2)))
+            self.db.writeGameStatistis(self.totalGamePlayedCount, dict[1], dict[2], dict[3], dict[4], dict[5], dict[6], winPercentage)
             file1.close()
 
     def play(self) -> None:
@@ -53,6 +62,13 @@ class Wordle:
         #global distribution
         expectedWord = self.dict.getRandomWord(self.selectedWordList)
         wordList = []
+
+        #db
+        self.db.writeGame(self.time)
+        id = self.db.getId(self.time)
+        self.db.currentGameId = id
+
+
 
         #Until a exit condition is given or program exits take a user input and check if valid
         while len(wordList) < 6:
@@ -73,6 +89,7 @@ class Wordle:
                     file1.write("The user input for try {} : {} \n".format(len(wordList), userInput))
                     file1.close()
                 isUserInputEqualToWord = self.ui_obj.wordIsEqualToInput(expectedWord, userInput)
+                self.db.writeAttemptTable(len(wordList), userInput, expectedWord, isUserInputEqualToWord)
                 if isUserInputEqualToWord:
                     self.gamesWon = self.gamesWon + 1
                     self.distribution[len(wordList)] = self.distribution[len(wordList)] + 1
@@ -123,11 +140,14 @@ class Wordle:
 def main():
     dict = Dictionary()
     ui_obj = UI()
-    Game = Wordle(dict, ui_obj)
+    db = databaseLogger()
+    Game = Wordle(dict, ui_obj, db)
     dict.getValidDictionary()
     writeWordRank()
+
+    db.generateReport()
     #Game.play()
-    Game.playWithHelper()
+    #Game.playWithHelper()
     #print(Game)
     #print(dict)
     #print(ui_obj)
