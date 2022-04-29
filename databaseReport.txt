@@ -1,0 +1,149 @@
+Game Statistics
+start date: 2022-04-28 20:44:33.084737
+end date: 2022-04-28 22:44:33.084737
+
+Number of games played = 1 
+Win Percentage = 0% 
+Game distribution for 1 = 0
+Game distribution for 2 = 0
+Game distribution for 3 = 0
+Game distribution for 4 = 0
+Game distribution for 5 = 0
+
+Number of games played = 2 
+Win Percentage = 50% 
+Game distribution for 1 = 0
+Game distribution for 2 = 0
+Game distribution for 3 = 0
+Game distribution for 4 = 0
+Game distribution for 5 = 0
+
+Number of games played = 3 
+Win Percentage = 66.67% 
+Game distribution for 1 = 0
+Game distribution for 2 = 0
+Game distribution for 3 = 0
+Game distribution for 4 = 33.33
+Game distribution for 5 = 0
+
+Number of games played = 4 
+Win Percentage = 75% 
+Game distribution for 1 = 0
+Game distribution for 2 = 0
+Game distribution for 3 = 25
+Game distribution for 4 = 25
+Game distribution for 5 = 0
+
+Number of games played = 5 
+Win Percentage = 60% 
+Game distribution for 1 = 0
+Game distribution for 2 = 0
+Game distribution for 3 = 20
+Game distribution for 4 = 20
+Game distribution for 5 = 0
+
+Number of games played = 6 
+Win Percentage = 66.67% 
+Game distribution for 1 = 0
+Game distribution for 2 = 0
+Game distribution for 3 = 16.67
+Game distribution for 4 = 16.67
+Game distribution for 5 = 0
+
+Number of games played = 7 
+Win Percentage = 57.14% 
+Game distribution for 1 = 0
+Game distribution for 2 = 0
+Game distribution for 3 = 14.29
+Game distribution for 4 = 14.29
+Game distribution for 5 = 0
+
+Number of games played = 8 
+Win Percentage = 62.5% 
+Game distribution for 1 = 0
+Game distribution for 2 = 12.5
+Game distribution for 3 = 12.5
+Game distribution for 4 = 12.5
+Game distribution for 5 = 0
+
+Number of games played = 9 
+Win Percentage = 66.67% 
+Game distribution for 1 = 0
+Game distribution for 2 = 11.11
+Game distribution for 3 = 11.11
+Game distribution for 4 = 22.22
+Game distribution for 5 = 0
+
+Number of games played = 10 
+Win Percentage = 70% 
+Game distribution for 1 = 0
+Game distribution for 2 = 20
+Game distribution for 3 = 10
+Game distribution for 4 = 20
+Game distribution for 5 = 0
+
+Number of games played = 11 
+Win Percentage = 63.64% 
+Game distribution for 1 = 0
+Game distribution for 2 = 18.18
+Game distribution for 3 = 9.09
+Game distribution for 4 = 18.18
+Game distribution for 5 = 0
+
+Number of games played = 12 
+Win Percentage = 58.33% 
+Game distribution for 1 = 0
+Game distribution for 2 = 16.67
+Game distribution for 3 = 8.33
+Game distribution for 4 = 16.67
+Game distribution for 5 = 0
+
+Number of games played = 13 
+Win Percentage = 53.85% 
+Game distribution for 1 = 0
+Game distribution for 2 = 15.38
+Game distribution for 3 = 7.69
+Game distribution for 4 = 15.38
+Game distribution for 5 = 0
+
+Number of games played = 14 
+Win Percentage = 50% 
+Game distribution for 1 = 0
+Game distribution for 2 = 14.29
+Game distribution for 3 = 7.14
+Game distribution for 4 = 14.29
+Game distribution for 5 = 0
+
+Number of games played = 15 
+Win Percentage = 46.67% 
+Game distribution for 1 = 0
+Game distribution for 2 = 13.33
+Game distribution for 3 = 6.67
+Game distribution for 4 = 13.33
+Game distribution for 5 = 0
+
+Number of games played = 16 
+Win Percentage = 43.75% 
+Game distribution for 1 = 0
+Game distribution for 2 = 12.5
+Game distribution for 3 = 6.25
+Game distribution for 4 = 12.5
+Game distribution for 5 = 0
+
+Number of games played = 17 
+Win Percentage = 41.18% 
+Game distribution for 1 = 0
+Game distribution for 2 = 11.76
+Game distribution for 3 = 5.88
+Game distribution for 4 = 11.76
+Game distribution for 5 = 0
+
+Number of games played = 18 
+Win Percentage = 38.89% 
+Game distribution for 1 = 0
+Game distribution for 2 = 11.11
+Game distribution for 3 = 5.56
+Game distribution for 4 = 11.11
+Game distribution for 5 = 0
+
+
