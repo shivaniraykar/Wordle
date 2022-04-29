@@ -145,7 +145,9 @@ def main():
     dict.getValidDictionary()
     writeWordRank()
 
-    db.generateReport()
+    db.createTable()
+    Game.play()
+    db.generateReport('2022-04-28 20:44:33.084737', '2022-04-28 22:44:33.084737')
     #Game.play()
     #Game.playWithHelper()
     #print(Game)

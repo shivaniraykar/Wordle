@@ -52,15 +52,24 @@ class databaseLogger:
             file1.write(f"start date: {startDate}\n")
             file1.write(f"end date: {endDate}\n")
 
-            self.cursor.execute("select * from statistics inner join game on game.id = statistics.gameId where game.date>= :startDate and date<= :endDate",{"startDate":startDate,"endDate":endDate})
-            data = self.cursor.fetchall()
+            self.cur.execute("select * from statistics")
+            print(self.cur.fetchall())
+
+            self.cur.execute("select * from game")
+            print(self.cur.fetchall())
+            
+            self.cur.execute("select * from statistics inner join game on game.id = statistics.gameId where game.date>= :startDate and date<= :endDate",{"startDate":startDate,"endDate":endDate})
+            data = self.cur.fetchall()
+            print(data)
             for row in data:
-                file1.write("Number of games played = {} \n".format(row.totalGamePlayedCount))
-                file1.write("Win Percentage = {}% \n".format(row.winPercentage))
+                print(row)
+                file1.write("Number of games played = {} \n".format(row[1]))
+                file1.write("Win Percentage = {}% \n".format(row[8]))
                 for i in range(1, 6):
-                    file1.write("Game distribution for {} = {}\n".format(i, row.game1Distribution))
+                   file1.write("Game distribution for {} = {}\n".format(i, row[i+2]))
             # file1.write(f'Total number of games played: {len(data)}\n')
-            # file1.write(f'Total number of games played: {len(data)}\n')
+            file1.write(f'\n')
+            file1.write(f'\n')
         except FileNotFoundError as e:
             print(f"Cannot open file ({e})")
             
